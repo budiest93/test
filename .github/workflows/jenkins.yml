@@ -1,0 +1,16 @@
+name: Trigger Jenkins
+
+on:
+  push:
+    branches:
+      - coba
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Jenkins
+        run: |
+          curl -X POST \
+          "https://jenkins.sistematika.id/job/plugin-erp-1-dev/build?token=sistematika123"
