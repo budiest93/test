@@ -14,4 +14,4 @@ jobs:
         run: |
           curl -f -X POST \
             --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
-            "https://JENKINS_URL/job/plugin-erp-1-dev/build"
+            "${{ vars.JENKINS_URL }}/job/plugin-erp-1-dev/build"
