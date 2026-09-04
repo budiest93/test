@@ -3,7 +3,7 @@ name: Trigger Jenkins
 on:
   push:
     branches:
-      - coba
+      - release-13-dev
 
 jobs:
   trigger-jenkins:
@@ -12,5 +12,6 @@ jobs:
     steps:
       - name: Trigger Jenkins
         run: |
-          curl -X POST \
-          "https://jenkins.sistematika.id/job/plugin-erp-1-dev/build?token=sistematika123"
+          curl -f -X POST \
+            --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
+            "https://JENKINS_URL/job/plugin-erp-1-dev/build"
