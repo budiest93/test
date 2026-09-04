@@ -4,14 +4,27 @@ on:
   push:
     branches:
       - coba
+      - main
 
 jobs:
-  trigger-jenkins:
+  trigger-jenkins-dev:
+    if: github.ref == 'refs/heads/coba'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Jenkins
+      - name: Trigger Jenkins DEV
         run: |
           curl -f -X POST \
             --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
             "${{ vars.JENKINS_URL }}/job/plugin-erp-1-dev/build"
+
+  trigger-jenkins-prod:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Jenkins PROD
+        run: |
+          curl -f -X POST \
+            --user "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
+            "${{ vars.JENKINS_URL }}/job/plugin-erp-1-prod/build"
